@@ -42,8 +42,8 @@ app.get("/allWords", (req, res) => {
 
 app.get("/pagesWord", (req, res) => {
   db.query(
-    "SELECT word FROM new_table GROUP BY word HAVING COUNT(word) > 1",
-    // "SELECT word,COUNT(word) page FROM new_table WHERE word IN (SELECT word FROM new_table  GROUP BY word HAVING COUNT(word) > 1)",
+    "SELECT word FROM words GROUP BY word HAVING COUNT(word) > 1",
+    // "SELECT word,COUNT(word) page FROM words WHERE word IN (SELECT word FROM words  GROUP BY word HAVING COUNT(word) > 1)",
     (err, result) => {
       if (err) {
         console.log("pagesWord get request error");
