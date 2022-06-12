@@ -18,8 +18,8 @@ function App() {
         setWordList([
           ...wordList,
           {
-            word: word,
-            page: page,
+            word: [...word],
+            page: [page],
           },
         ]);
       });
@@ -69,17 +69,17 @@ function App() {
             </div>
           );
         })}
-      </div>
 
-      <button onClick={pagesWord}>Pages With Word</button>
-      {wordList.map((val, idx) => {
-        return (
-          <div className="allWords" key={idx}>
-            <h3>Repeatable Word: {val.word}</h3>
-            <h3>On Which Page: {val.page}</h3>
-          </div>
-        );
-      })}
+        <button onClick={pagesWord}>Pages With Word</button>
+        {wordList.map((val, idx) => {
+          return (
+            <div className="allWords" key={idx}>
+              <h3>Repeatable Word: {val.word}</h3>
+              <h3>On Which Page: {val.page}</h3>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
