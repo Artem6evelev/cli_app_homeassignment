@@ -48,7 +48,7 @@ app.get("/pagesWord", (req, res) => {
       if (err) {
         console.log("pagesWord get request error");
       } else {
-        //TODO write query and function that will return array of pages
+        //!EXTRA ASSIGNMENT
         console.log("result", result);
         // let resultArr = Object.keys(result).map((key) => [
         //   Number(key),
