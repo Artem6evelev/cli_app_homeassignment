@@ -22,12 +22,22 @@ app.post("/addWord", (req, res) => {
     [word, page],
     (err, result) => {
       if (err) {
-        console.log(err, "bloody post request error");
+        console.log(err, "post request error!");
       } else {
         res.send("Values Inserted");
       }
     }
   );
+});
+
+app.get("/allWords", (req, res) => {
+  db.query("SELECT * FROM words", (err, result) => {
+    if (err) {
+      console.log(err, "get request error!");
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.listen(3001, () => {

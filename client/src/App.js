@@ -7,7 +7,6 @@ function App() {
   const [word, setWord] = useState("");
   const [page, setPage] = useState(0);
   const [wordList, setWordList] = useState([]);
-  console.log("wordList", wordList);
 
   const addWord = () => {
     axios
@@ -16,7 +15,6 @@ function App() {
         page: page,
       })
       .then(() => {
-        console.log("success");
         setWordList([
           ...wordList,
           {
@@ -24,6 +22,18 @@ function App() {
             page: page,
           },
         ]);
+      });
+  };
+
+  const getWords = () => {
+    axios
+      .get("http://localhost:3001/allWords", {
+        word: word,
+        page: page,
+      })
+      .then((res) => {
+        console.log(res);
+        setWordList(res.data);
       });
   };
 
@@ -38,6 +48,17 @@ function App() {
           onChange={(event) => setPage(event.target.value)}
         />
         <button onClick={addWord}>Add word</button>
+      </div>
+      <div className="words">
+        <button onClick={getWords}>All words</button>
+        {wordList.map((val, idx) => {
+          return (
+            <div className="allWords" key={idx}>
+              <h3>Word: {val.word}</h3>
+              <h3>Page: {val.page}</h3>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
