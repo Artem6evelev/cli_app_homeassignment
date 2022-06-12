@@ -40,6 +40,21 @@ app.get("/allWords", (req, res) => {
   });
 });
 
+app.get("/pagesWord", (req, res) => {
+  db.query(
+    "SELECT word FROM new_table GROUP BY word HAVING COUNT(word) > 1",
+    // "SELECT word,COUNT(word) page FROM new_table WHERE word IN (SELECT word FROM new_table  GROUP BY word HAVING COUNT(word) > 1)",
+    (err, result) => {
+      if (err) {
+        console.log("pagesWord get request error");
+      } else {
+        console.log("result", result);
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Server in running on port 3001");
 });

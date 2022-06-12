@@ -37,6 +37,15 @@ function App() {
       });
   };
 
+  //TODO functionalaty for button: Pages With Word
+  const pagesWord = () => {
+    // setOpen(!open);
+    axios.get("http://localhost:3001/pagesWord").then((response) => {
+      console.log(response);
+      setWordList(response.data);
+    });
+  };
+
   return (
     <div className="App">
       <div className="information">
@@ -49,6 +58,7 @@ function App() {
         />
         <button onClick={addWord}>Add word</button>
       </div>
+
       <div className="words">
         <button onClick={getWords}>All words</button>
         {wordList.map((val, idx) => {
@@ -60,6 +70,16 @@ function App() {
           );
         })}
       </div>
+
+      <button onClick={pagesWord}>Pages With Word</button>
+      {wordList.map((val, idx) => {
+        return (
+          <div className="allWords" key={idx}>
+            <h3>Repeatable Word: {val.word}</h3>
+            <h3>On Which Page: {val.page}</h3>
+          </div>
+        );
+      })}
     </div>
   );
 }
