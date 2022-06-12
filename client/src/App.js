@@ -1,13 +1,30 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import "./App.css";
 
 function App() {
   const [word, setWord] = useState("");
   const [page, setPage] = useState(0);
+  const [wordList, setWordList] = useState([]);
+  console.log("wordList", wordList);
 
-  const displayInfo = () => {
-    console.log(word + page);
+  const addWord = () => {
+    axios
+      .post("http://localhost:3001/addWord", {
+        word: word,
+        page: page,
+      })
+      .then(() => {
+        console.log("success");
+        setWordList([
+          ...wordList,
+          {
+            word: word,
+            page: page,
+          },
+        ]);
+      });
   };
 
   return (
@@ -20,7 +37,7 @@ function App() {
           type="number"
           onChange={(event) => setPage(event.target.value)}
         />
-        <button onClick={displayInfo}>Add word</button>
+        <button onClick={addWord}>Add word</button>
       </div>
     </div>
   );

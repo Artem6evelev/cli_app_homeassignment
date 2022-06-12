@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
 
 const db = mysql.createConnection({
   user: "root",
@@ -14,7 +18,7 @@ app.post("/addWord", (req, res) => {
   const page = req.body.page;
 
   db.query(
-    "INSERT INTO new_table (word, page) VALUES(?,?)",
+    "INSERT INTO words (word, page) VALUES(?,?)",
     [word, page],
     (err, result) => {
       if (err) {
